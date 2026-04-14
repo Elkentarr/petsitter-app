@@ -1,3 +1,4 @@
 docker-compose.ymlV1
 app/__pycache__
 app/Clients/*
+NotesPerso.txt
