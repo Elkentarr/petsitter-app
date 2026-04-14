@@ -6,6 +6,7 @@ import csv
 
 chemin_actuel = os.getcwd() #rep du script
 BASE_CLIENTS = os.path.join(chemin_actuel, "Clients") # .\DossierScript\Clients\
+os.makedirs(BASE_CLIENTS, exist_ok=True) #On créé le dossier Clients, s'il n'existe pas
 
 def get_liste_clients(): #Récupére tout les nom de dossiers contenu dans le dossiers Clients
     return [d for d in os.listdir(BASE_CLIENTS) if os.path.isdir(os.path.join(BASE_CLIENTS, d))]
