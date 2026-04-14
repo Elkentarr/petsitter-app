@@ -4,7 +4,7 @@
 Application pour auto-entreprise de petsitting permettant :
 - la gestion des clients et animaux
 - le calcul des coûts de prestation
-- la génération de documents (contrats, devis, factures)
+- la génération de documents pdf (contrats, devis, factures)
 
 Le projet existe en deux versions :
 - Version Desktop (Tkinter)
