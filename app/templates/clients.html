@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clients</title>
+</head>
+<body>
+
+    <h1>Liste des clients</h1>
+
+    <ul>
+    {% for client in clients %}
+        <li>
+            <a href="/client/{{ client }}">{{ client }}</a>
+            <a href="/client/delete/{{ client }}"><button type="submit">Supprimer</button></a>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="/client/new">Créer un client</a>
+
+</body>
+</html>

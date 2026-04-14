@@ -1,0 +1,33 @@
+##V2 plus robuste
+
+version: "3.9"  # Version du format Docker Compose
+
+services: #déclares les conteneurs a lancer - Chaque service = 1 conteneur logique
+  flask: #nom du service, ce nom est aussi reconnu en interne Docker (DNS) donc http://flask:5000
+    build: . #construit l'image avec le dockerfile présent dans le dossier courant 
+    container_name: flask_app #force le nom du conteneur sans ça le nom par défaut serait <nom_du_dossier>_<service>_<numéro_incrementer> /!\ perd la possibilité de scale (car tout les conteneur aurait le même nom) donc en général on évite
+    expose: #permet d'indiquer sur qu'elle port le conteneur ecoute (accessible uniquement entre conteneur)
+      - "5000"
+    restart: always #redémarre si crash
+    volumes: #On “monte” un fichier local dans le conteneur - permet de conserver les fichiers clients même en cas de suppression de l'instance docker pour mise a jour par exemple
+      - ./app/Clients:/mon_app/app/Clients
+
+    healthcheck: #rend plus robuste en permettant de vérifier quand flask est lancé et en écoute
+      test: curl -f http://localhost:5000 || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  nginx:
+    image: nginx:latest #télécharge une image officielle Nginx - on utilise une image prête
+    container_name: nginx_proxy
+    ports: #PORT_PC : PORT_CONTENEUR - rediriger le port 80 du host vers le port 80 du conteneur
+      - "80:80"
+    volumes: #On “monte” un fichier local dans le conteneur - permet de modifier le fichier nginx sans rebuild l'image
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on: #Création d'une dépendance - démarre Flask AVANT Nginx - il s'agit d'un simple ordre de lancement, mais il n'attend pas forcément que flask est fini de démmarer
+      flask:
+        condition: service_healthy #lié au healthcheck de flask et donc permet d'être sur qu'il a fini de démarrer et qu'il ecoute. evite de router vers un service down
+        
+    restart: always

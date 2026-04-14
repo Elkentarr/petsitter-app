@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier client</title>
+</head>
+<body>
+
+    <h1>Modifier le client : {{ nom }}</h1>
+    
+    {% if success %}
+    <p style="color:green;">Modifications enregistrées ✔</p>
+    {% endif %}
+    
+    <form method="POST">
+
+        <label>Nom :</label>
+        <input type="text" name="nom" value="{{ client.Nom }}"><br><br>
+
+        <label>Prénom :</label>
+        <input type="text" name="prenom" value="{{ client.Prenom }}"><br><br>
+
+        <label>Email :</label>
+        <input type="text" name="email" value="{{ client.Email }}"><br><br>
+
+        <label>Téléphone :</label>
+        <input type="text" name="telephone" value="{{ client.Telephone }}"><br><br>
+
+        <label>Adresse :</label>
+        <input type="text" name="adresse" value="{{ client.Adresse }}"><br><br>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <br>
+    <a href="/">Retour</a>
+
+</body>
+</html>
