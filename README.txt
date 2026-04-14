@@ -1,4 +1,4 @@
-#PetSitter Management Tool
+# PetSitter Management Tool
 
 ## Description
 Application pour auto-entreprise de petsitting permettant :
@@ -26,29 +26,35 @@ Le projet existe en deux versions :
 - Flask (version web)
 - CSV (stockage local)
 - Docker
-
+- nginx
 
 ## Installation locale
 
-cmd
+```bash
 pip install -r requirements.txt
+```
 
-#Desktop
+## Desktop
 
 python ./app/main.py
 
 Ou pour une version .exe
+```bash
 pyinstaller --onefile --noconsole main.py
+```
 
-#WEB - Pour rappel pas encore terminé
+## WEB - (En cours)
 python ./app/web.py
 
-## DOCKER
+Accès :
+http://localhost:5000
 
-# Build de l'image
-cmd
-docker build -t petsitter-app .
+## DOCKER WEB + NGINX
 
-# Lancement
-cmd
-docker run -p 5000:5000 petsitter-app
+Build du conteneur :
+```bash
+docker-compose up --build
+```
+
+Accès :
+http://localhost
