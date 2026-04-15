@@ -23,9 +23,9 @@ jobs: #action qui ce lance si un des delclencheur est activé (on)
         pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Vérification Flask (test simple)
-      run: | #vérification de l'installation de Flask - a améliorer plus tard
-        python -c "import flask; print('Flask OK')"
+    - name: Tests
+      run: | #Lancement des tests local
+        pytest
 
     - name: Build Docker
       run: | # construction de l'image
