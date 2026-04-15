@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+on: #Declencheurs
+  push: #action du declenchement (chaque git push)
+    branches: [ "main" ] #sur la branche main
+  pull_request: #quand quelqu’un ouvre/modifie une PR
+
+jobs: #action qui ce lance si un des delclencheur est activé (on)
+  build: #action
+    runs-on: ubuntu-latest #lancement machine virtuel neuf (rien n'est conservé entre les runs)
+
+    steps: #liste des actions executer dans l'ordre
+    - name: Récupération du code
+      uses: actions/checkout@v4 #telechargement du repo dans la vm
+
+    - name: Installation de Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11" #Important d'indiquer une version précise
+
+    - name: Installation des dépendances
+      run: | # | + cmd > update de pip et installation des prérequis
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Vérification Flask (test simple)
+      run: | #vérification de l'installation de Flask - a améliorer plus tard
+        python -c "import flask; print('Flask OK')"
+
+    - name: Build Docker
+      run: | # construction de l'image
+        docker build -t petsitter-app .
