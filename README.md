@@ -61,7 +61,9 @@ pyinstaller --onefile --noconsole main.py
 ```
 
 ## WEB - (En cours)
+```bash
 python -m app.web
+```
 
 Accès :
 http://localhost:5000
