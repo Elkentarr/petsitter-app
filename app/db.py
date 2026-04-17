@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import shutil #sert a supprimer les dossiers a tout ce qu'il y a en dessous
 import csv
+from datetime import datetime #pour récup la date du jour
 
 
 chemin_actuel = os.getcwd() #rep du script
@@ -132,6 +133,7 @@ def set_animal_info(nom_client, nom_animal, info, valeur): #modifie: : liste des
 def create_animal(nom_client, nom_animal):
     DOSSIER_CIBLE = get_client_animaux_path(nom_client)
     FICHIER_NOUVEAU = os.path.join(DOSSIER_CIBLE, f"{nom_animal}.csv")
+    date_du_jour = datetime.now().strftime('%d/%m/%Y')
     if not os.path.exists(FICHIER_NOUVEAU):
         colonnes = ["Espéce", "Sexe", "Nom", "Stérilisé", "DateDeNaissance", "Caractère", "Nourriture", "BesoinParticulier"]
         # Créer le fichier et écrire l'en-tête
@@ -139,6 +141,7 @@ def create_animal(nom_client, nom_animal):
             writer = csv.DictWriter(f, fieldnames=colonnes, delimiter=";")
             writer.writeheader()  # écrit la ligne des titres
             writer.writerow({col: "" for col in colonnes}) #écris des valeur a vide pour initialiser
+        set_animal_info(nom_client, nom_animal, "DateDeNaissance", date_du_jour) #On compléte par défaut le champ date (sinon bug html et possiblement sur d'autre outil)
         return True, f"Animal créé : {nom_animal}" #on renvoi si réussite + message
     else:
         return False, "Cette animal existe déjà." #on renvoi si echec + message
