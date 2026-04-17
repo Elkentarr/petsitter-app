@@ -30,6 +30,17 @@
 
         <button type="submit">Enregistrer</button>
     </form>
+    <h2>Liste des animaux</h2>
+    <ul>
+    {% for animal in animaux %}
+        <li>
+            <a href="/client/{{ fiche_client }}/{{ animal }}">{{ animal }}</a>
+        </li>
+        {% endfor %}
+        <li>
+            <a href="/client/{{ fiche_client }}/nouvel_animal">AJOUTER UN ANIMAL</a>
+        </li>
+    </ul>
 
     <br>
     <a href="/">Retour</a>

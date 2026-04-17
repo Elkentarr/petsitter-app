@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier animal</title>
+</head>
+<body>
+
+    <h1>Modifier l'animal : {{ animal.nom }}</h1>
+    
+    {% if success %}
+    <p style="color:green;">Modifications enregistrées ✔</p>
+    {% endif %}
+    
+    <form method="POST">
+
+        <label>Espece :</label>
+        <input type="text" name="espece" value="{{ animal.espece }}"><br><br>
+
+        <label>Sexe :</label>
+        <select name="sexe" id="sexe">
+	  <option value="M" {% if animal.sexe == "M" %}selected{% endif %}>M</option>
+	  <option value="F" {% if animal.sexe == "F" %}selected{% endif %}>F</option>
+	</select><br><br>
+
+        <label>Nom :</label>
+        <input type="text" name="nom" value="{{ animal.nom }}"><br><br>
+
+        <label>Stérilisé :</label>
+	  <input type="checkbox" name="sterilise" {% if animal.sterilise == "1" %}checked{% endif %}><br><br>
+
+        <label>Date de naissance :</label>
+        <input type="date" name="date_naissance" value="{{ animal.date_naissance }}"><br><br>
+	  
+        <label>Caractère :</label>
+        <input type="text" name="caractere" value="{{ animal.caractere }}"><br><br>
+	  
+        <label>Nourriture :</label>
+        <input type="text" name="nourriture" value="{{ animal.nourriture }}"><br><br>
+	  
+	  <label>Besoin particulier :</label>
+        <input type="text" name="besoin" value="{{ animal.besoin }}"><br><br>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <br>
+    <a href="/client/{{ client }}">Retour</a>
+
+</body>
+</html>
