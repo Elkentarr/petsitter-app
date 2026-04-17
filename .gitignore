@@ -1,3 +1,5 @@
 docker-compose.ymlV1
 app/__pycache__
 NotesPerso.txt
+.pytest_cache
+Clients
