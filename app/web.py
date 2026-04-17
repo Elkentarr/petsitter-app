@@ -15,7 +15,6 @@ def detail_client(nom_client):
     success = False
 
     if request.method == "POST":
-        print ("test")
         # récupération des données du formulaire
         db.set_client_info(nom_client, "Nom", request.form["nom"])
         db.set_client_info(nom_client, "Prénom", request.form["prenom"])
